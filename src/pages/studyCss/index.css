@@ -55,3 +55,33 @@ a{
   margin: 0;
   box-shadow: none;
 }
+.header{
+  width: 100%;
+  height: 40px;
+}
+.colorfullText{
+  height: 34px;
+  line-height: 34px;
+  font-size: 19px;
+  margin-bottom:10px ;
+  border: 1px solid #eee;
+}
+
+@keyframes shadowing {
+  to{
+    color: #ff0266;
+    text-shadow: 2px 0 7px #ff0266
+  }
+}
+.colorfullText span{
+  font-size: 30px;
+  font-weight: 600;
+  color: #faebd7;
+  animation: shadowing 1s ease-in-out infinite alternate;
+}
+.text3D{
+  outline: none;
+  user-select: none;
+  font-size: 25px;
+  text-shadow: -1px 1px #bbb ,-2px 2px rgb(81, 11,11), -3px 3px #bbb, -4px 4px #bbb, -5px 5px #bbb, -6px 6px 3px #666;
+}

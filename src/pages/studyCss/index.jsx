@@ -1,5 +1,5 @@
-import {React, useEffect, useState} from 'react'
-import { Input , Button} from 'antd'
+import { React, useEffect, useState } from 'react'
+import { Input, Button } from 'antd'
 import "./index.css"
 
 export default function StudyCss() {
@@ -12,11 +12,11 @@ export default function StudyCss() {
   }
 
   // console.log(a === 1 && a === 2 && a=== 3);如果是===那是肯定不行的，因为会从内存来比较
-  console.log(a == 1 && a == 2 && a == 4);
+  // console.log(a == 1 && a == 2 && a == 4);
   //void 表达式,undefined是window.undefined,是一个window的属性(算是个bug),是一个只读属性，
   // let undefined = 1;a2 = undefined;console.log(a2);//会输出1,这就是存在的问题
   let a2 = void 0
-  console.log(a2);
+  // console.log(a2);
 
   //递归求和
   function sum(nums) {
@@ -27,33 +27,30 @@ export default function StudyCss() {
     //从第0位
     return f(0)
   }
-  console.log(sum([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  // console.log(sum([1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
   //零宽字符
   let account1 = "随风而#8205;&#8205;&#8203;&#8205;&#8205;&#8205;&#8203;&#8204;&#8205;&#8204;&#8203;&#8204;&#8204;&#8204;&#8203;&#8204;3去", account2 = "随风而去"
 
   //生成彩色文字
-  const [colorfullText,setColorfullText] = useState()
-  const [deleteKey, setDeleteKey] = useState()
+  const [colorfullText, setColorfullText] = useState('')
+  const [colorfullTextDoc, setColorfullTextDoc] = useState()
   useEffect(() => {
-    setColorfullText(document.getElementsByClassName('colorfullText'))
-    setDeleteKey(document.getElementsByClassName('ant-input'))
-  },[])
-  const $colorTextSpan = function(e){
-    let Span = document.createElement('span')
-    deleteKey[0].onKeyUp = (e) => {
-      if(e.keyCode == 46){
-        Array.from(e.target.value).map((n) => {
-          Span.innerText = n
-          colorfullText[0].appendChild(Span)
-        })
-      }else if(e.keyCode == 13){
-
-      }
+    setColorfullTextDoc(document.getElementsByClassName('colorfullText'))
+  }, [])
+  const $colorTextSpan = function (e) {
+    colorfullTextDoc[0].innerHTML = null
+    for(let i =0; i<e.length; i++){
+      let span = []
+      span[i] = document.createElement('span')
+      span[i].innerText = e[i]
+      span[i].style.animationDelay = `${0.2 * i}s`
+      colorfullTextDoc[0].appendChild(span[i])
     }
   }
   const $clearTextSpan = () => {
-    colorfullText[0].innerHTML = ''
+    setColorfullText('')
+    colorfullTextDoc[0].innerHTML = null
   }
 
 
@@ -76,15 +73,27 @@ export default function StudyCss() {
         <div className='header'>
           <Input
             placeholder='说点什么吧'
-            onChange={(e) => {$colorTextSpan(e)}}
+            value={colorfullText}
+            onChange={(e) => {
+              setColorfullText(e.target.value)}}
           />
         </div>
-        <div className='colorfullText'>
-          <span>&nbsp;</span>
+        <div>
+          <div className='colorfullText'>
+          </div>
+          <Button
+            onClick={() => $colorTextSpan(colorfullText)}
+          >确定</Button>
+          <Button
+            onClick={$clearTextSpan}
+          >清除</Button>
         </div>
-        <Button
-          onClick={$clearTextSpan}
-        >清除</Button>
+        <div >
+          <h1 contentEditable className='text3D'>这里是立体文字</h1>
+        </div>
+      </div>
+      <div className='img-wai'>
+
       </div>
     </div>
   )
