@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function Header() {
-  const [path] = useState([
+  const path = [
     {id:'001',path:'Bar'},
     {id:'002',path:'LineEcharts'},
     {id:'003',path:'SmoothedLineChart'},
@@ -10,7 +10,8 @@ export default function Header() {
     {id:'005',path:'Pie'},
     {id:'006',path:'Self'},
     {id:'007',path:'Video'},
-  ])
+    {id:'008',path:'AHooks'},
+  ]
   // const ThemeContext = React.createContext(path);
   const navigate = useNavigate();
   return (

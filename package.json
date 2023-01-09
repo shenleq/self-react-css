@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ahooksjs/use-url-state": "^3.5.1",
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "ahooks": "^3.7.4",
     "ajax": "^0.0.4",
     "antd": "^4.21.6",
     "axios": "^0.27.2",
@@ -20,15 +22,13 @@
     "browserslist": "^4.18.1",
     "camelcase": "^6.2.1",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "css-doodle": "^0.32.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
     "echarts": "^5.3.3",
     "echarts-for-react": "^3.0.2",
-    "eslint": "^8.3.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.5.0",
@@ -39,6 +39,7 @@
     "leaflet": "^1.8.0",
     "less-loader": "^11.0.0",
     "mini-css-extract-plugin": "^2.4.5",
+    "mockjs": "^1.1.0",
     "nanoid": "^3.1.18",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -61,13 +62,14 @@
     "resolve": "^1.20.0",
     "resolve-url-loader": "^4.0.0",
     "s": "^1.0.0",
+    "sass": "^1.23.6",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
-    "three.js": "^0.77.1",
+    "three.js": "^0.77.0",
     "typescript": "^4.7.4",
     "web-vitals": "^0.2.4",
     "webpack": "^5.64.4",
@@ -84,7 +86,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-undef": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -99,7 +104,9 @@
     ]
   },
   "devDependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "sass": "^1.23.6",
+    "scss-loader": "^0.0.1"
   },
   "jest": {
     "roots": [

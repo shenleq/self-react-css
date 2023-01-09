@@ -6,6 +6,7 @@ import TransverseChart from '../components/Echarts/TransverseChart'
 import Pie from '../components/Echarts/Pie'
 import Self from '../components/Echarts/Slfe'
 import Video from '../components/Video'
+import AHooks from '../components/AHooks'
 // import ReactStudy from '../pages/ReactStudy'
 // import StudyCss from '../pages/studyCss'
 
@@ -40,6 +41,10 @@ export default [
         path:'/Video',
         key:'Video',
         element:<Video key="Video"/>
+      },
+      {
+        path:'/AHooks',
+        element:<AHooks key="AHooks"/>
       },
       {
         path:'/',

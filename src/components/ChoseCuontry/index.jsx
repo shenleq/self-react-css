@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from 'react'
 import { Button } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 function ChoseCuontry(props) {
   let { setcontrol } = props

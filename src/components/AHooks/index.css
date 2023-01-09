@@ -1,0 +1,19 @@
+.name-div{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
+  border: 2px solid ;
+  padding: 10px;
+}
+.name-div-item{
+  flex: 1;
+  border: 1px solid red;
+}
+.name-span{
+  font-size: 25px;
+  color: red;
+}
+.nameInput{
+  color: #000;
+}

@@ -1,3 +1,5 @@
+@import "./mask.css";
+
 body{
   box-sizing: border-box;
 }
@@ -33,6 +35,8 @@ a{
   margin: 2px 0 0 2px;
   background-image: url(https://img-qn-1.51miz.com/Element/00/81/30/71/f10b6b38_E813071_b15789cb.jpg!/quality/90/unsharp/true/compress/true/format/jpg/fh/320);
 }
+
+
 .img-item:nth-child(3n + 1){
   background-position-x: 44px;
 }
@@ -84,4 +88,36 @@ a{
   user-select: none;
   font-size: 25px;
   text-shadow: -1px 1px #bbb ,-2px 2px rgb(81, 11,11), -3px 3px #bbb, -4px 4px #bbb, -5px 5px #bbb, -6px 6px 3px #666;
+}
+
+css-doodle {
+  width: 400px;
+  height: 300px;
+  margin-left: 20px;
+  --rule1: (
+    @grid: 5 / 8em;
+    --d: @p(45deg, -45deg, 135deg, -135deg);
+    --lg: linear-gradient(@var(--d),#60569e 50%,transparent 0);
+    background:
+      @var(--lg) 0 0 / 100% 100%,
+      @var(--lg) 0 0 / 50% 50%;
+    transform: scale(@rand(.2, .9));
+  );
+  --rule2: (
+    @grid: 5 / 8em;
+    background: #0a0c27;
+    @shape: clover 5;
+    background: hsla(
+      calc(360 - @i * 4), 70%, 68%, @r.8
+    );
+    transform:
+      scale(@r(.2, 1.5))
+      translate(@m2.@r(±50%));
+  )
+  --rule3: (
+    background: rgba(
+      96, 86, 158,
+      calc(@row * @col / @size)
+    );
+  )
 }
