@@ -36,11 +36,23 @@ import {Route, Routes, Navigate, BrowserRouter, useRoutes, NavLink} from 'react-
 import useMap from "./routes"
 
 export default function ReactStudy() {
+	const path = [
+    {id:'001',path:'Bar'},
+    {id:'002',path:'LineEcharts'},
+    {id:'003',path:'SmoothedLineChart'},
+    {id:'004',path:'TransverseChart'},
+    {id:'005',path:'Pie'},
+    {id:'006',path:'Self'},
+    {id:'007',path:'Video'},
+    {id:'008',path:'AHooks'},
+  ]
   const element = useRoutes(useMap)
   return (
     <>
       	<div className='R-Echars'>
-				<Header />
+				<Header 
+				  path={path}
+				/>
 				{/* <Routes>
 					  	<Route path='/Bar' element={<Bar/>} />
 					  	<Route path='/LineEcharts' element={<LineEcharts/>} />
