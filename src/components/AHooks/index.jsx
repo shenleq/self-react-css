@@ -20,10 +20,13 @@ import {
   useResetState,
   useEventListener,
   useDrag,
-  useDrop
+  useDrop,
+  useAntdTable,
 } from "ahooks";
 import useUrlState from "@ahooksjs/use-url-state";
 import Mock from "mockjs";
+import { VirtualKeyboard } from '../../pageUtils/VK/index'
+import KioskBoard from 'kioskboard';
 import "./index.css";
 
 const location = useLocation;
@@ -201,14 +204,14 @@ const AHooks = () => {
   ); //useCookieStateString为cookies的key， cookiesMessage为值， setCookiesMessage改变这个值
   //与useCookieState相似
   const [localMessage, setLocalMessage] = useLocalStorageState(
-    "use-local-storage-state-demo1", //locaStorage的key
+    "use-local", //locaStorage的key
     {
       defaultValue: "Hello~", //配置默认值Hello~
     }
   );
   //与useLocalStorageState用法一致
   const [sessionMessage, setSessionMessage] = useSessionStorageState(
-    "use-session-storage-state-demo1", //locaStorage的key
+    "use-session", //locaStorage的key
     {
       defaultValue: "Hello~", //配置默认值Hello~
     }
@@ -342,9 +345,9 @@ const AHooks = () => {
   //拖拽对象
   const DragItem = ({ data }) => {
     const dragRef = useRef(null);
-  
+
     const [dragging, setDragging] = useState(false);
-  
+
     useDrag(data, dragRef, {
       onDragStart: () => {
         setDragging(true);
@@ -353,19 +356,19 @@ const AHooks = () => {
         setDragging(false);
       },
     });
-  
+
     return (
       <div
         ref={dragRef}
         style={{
-          border: '1px solid #e8e8e8',
+          border: "1px solid #e8e8e8",
           padding: 16,
           width: 80,
-          textAlign: 'center',
+          textAlign: "center",
           marginRight: 16,
         }}
       >
-        {dragging ? 'dragging' : `box-${data}`}
+        {dragging ? "dragging" : `box-${data}`}
       </div>
     );
   };
@@ -391,6 +394,75 @@ const AHooks = () => {
     onDragEnter: () => setIsHovering(true),
     onDragLeave: () => setIsHovering(false),
   });
+
+  const [V, setV] = useState({value:"hello"})
+
+  /**
+   * @description 虚拟键盘配置(init)以及应用(run)
+   */
+  //键盘3排对应的键值
+  const keysObj = [
+    {
+       "0": "Q",
+       "1": "W",
+       "2": "E",
+       "3": "R",
+       "4": "T",
+       "5": "Y",
+       "6": "U",
+       "7": "I",
+       "8": "O",
+       "9": "P"
+    },
+    {
+       "0": "A",
+       "1": "S",
+       "2": "D",
+       "3": "F",
+       "4": "G",
+       "5": "H",
+       "6": "J",
+       "7": "K",
+       "8": "L"
+    },
+    {
+       "0": "Z",
+       "1": "X",
+       "2": "C",
+       "3": "V",
+       "4": "B",
+       "5": "N",
+       "6": "M",
+       "7": ",",
+       "8": ".",
+       "9": "/"
+    }
+ ]
+  KioskBoard.init({
+    keysArrayOfObjects: keysObj,  //键盘键值对设置
+    keysJsonUrl: null,  //网络位置键盘键值对设置
+    keysSpecialCharsArrayOfStrings: null,  
+    keysNumpadArrayOfNumbers: null,
+    language: 'en',
+    theme: 'light',
+    autoScroll: true,
+    capsLockActive: true,
+    allowRealKeyboard: false,
+    allowMobileKeyboard: false,
+    cssAnimations: true,
+    cssAnimationsDuration: 360,
+    cssAnimationsStyle: 'slide',
+    keysAllowSpacebar: true,
+    keysSpacebarText: 'Space',
+    keysFontFamily: 'sans-serif',
+    keysFontSize: '22px',
+    keysFontWeight: 'normal',
+    keysIconSize: '25px',
+    keysEnterText: 'Enter',
+    keysEnterCallback: undefined,
+    keysEnterCanClose: true,
+  })
+  KioskBoard.run('.js-kioskboard-input');
 
   useEffect(() => {
     console.log(location);
@@ -443,69 +515,81 @@ const AHooks = () => {
       </div>
       {/* 从part2开始 */}
       <div className="name-div-item">
-        <div>
-          <p>
-            Ready: {JSON.stringify(ready)}
-            <button onClick={toggle} style={{ marginLeft: 16 }}>
-              Toggle Ready
-            </button>
-          </p>
-          <p>Username: {loading ? "Loading" : data}</p>
-        </div>
-        <div>
-          <pre>{JSON.stringify(state, null, 2)}</pre>
-          <p>
-            <button type="button" onClick={() => setState({ hello: "world" })}>
-              set hello
-            </button>
-            <button
-              type="button"
-              onClick={() => setState({ foo: "bar" })}
-              style={{ margin: "0 8px" }}
+        <div className="nei">
+          <div className="mask"></div>
+          <div>
+            <p>
+              Ready: {JSON.stringify(ready)}
+              <button onClick={toggle} style={{ marginLeft: 16 }}>
+                Toggle Ready
+              </button>
+            </p>
+            <p>Username: {loading ? "Loading" : data}</p>
+          </div>
+          <div>
+            <pre>{JSON.stringify(state, null, 2)}</pre>
+            <p>
+              <button
+                type="button"
+                onClick={() => setState({ hello: "world" })}
+              >
+                set hello
+              </button>
+              <button
+                type="button"
+                onClick={() => setState({ foo: "bar" })}
+                style={{ margin: "0 8px" }}
+              >
+                set foo
+              </button>
+              <button
+                type="button"
+                onClick={() => setState((prev) => ({ count: prev.count + 1 }))}
+              >
+                count + 1
+              </button>
+            </p>
+          </div>
+          <div>
+            <div
+              style={{
+                margin: "8px 0",
+                border: "1px solid #e8e8e8",
+                padding: 8,
+              }}
             >
-              set foo
-            </button>
-            <button
-              type="button"
-              onClick={() => setState((prev) => ({ count: prev.count + 1 }))}
+              <div>current name: {prestate.name}</div>
+            </div>
+            <div>previous name: {(previousName || {}).name}</div>
+            <div style={{ marginTop: 8 }}>
+              <input
+                style={{ width: 220 }}
+                value={prestate.name}
+                onChange={(e) => setPreState({ name: e.target.value })}
+                placeholder="new name"
+              />
+            </div>
+          </div>
+          <div>
+            <div
+              ref={dropRef}
+              style={{
+                border: "1px dashed #e8e8e8",
+                padding: 16,
+                textAlign: "center",
+              }}
             >
-              count + 1
-            </button>
-          </p>
-        </div>
-        <div>
-          <div
-            style={{ margin: "8px 0", border: "1px solid #e8e8e8", padding: 8 }}
-          >
-            <div>current name: {prestate.name}</div>
-          </div>
-          <div>previous name: {(previousName || {}).name}</div>
-          <div style={{ marginTop: 8 }}>
-            <input
-              style={{ width: 220 }}
-              value={prestate.name}
-              onChange={(e) => setPreState({ name: e.target.value })}
-              placeholder="new name"
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            ref={dropRef}
-            style={{
-              border: "1px dashed #e8e8e8",
-              padding: 16,
-              textAlign: "center",
-            }}
-          >
-            {isHovering ? "release here" : "drop here"}
-          </div>
+              {isHovering ? "release here" : "drop here"}
+            </div>
 
-          <div style={{ display: "flex", marginTop: 8 }}>
-            {["1", "2", "3", "4", "5"].map((e, i) => (
-              <DragItem key={e} data={e} />
-            ))}
+            <div style={{ display: "flex", marginTop: 8 }}>
+              {["1", "2", "3", "4", "5"].map((e, i) => (
+                <DragItem key={e} data={e} />
+              ))}
+            </div>
           </div>
+          {/* <div><Input onClick={() => VirtualKeyboard.showKeyboardSetState(V, AHooks)} value={V.value} /></div> */}
+          <input class="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
         </div>
       </div>
       {/*从part3*/}
