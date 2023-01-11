@@ -7,8 +7,10 @@
   padding: 10px;
 }
 .name-div-item{
+  position: relative;
   flex: 1;
   border: 1px solid red;
+  overflow-y: scroll;
 }
 .name-span{
   font-size: 25px;
@@ -16,4 +18,20 @@
 }
 .nameInput{
   color: #000;
+}
+.name-div-item .nei{
+  width: 100%;
+  height: 900px;
+}
+.name-div-item .mask{
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-image: radial-gradient(transparent 1px, #fff 1px);
+  background-size: 4px 4px;
+  backdrop-filter: saturate(50%) blur(4px);  
+  /* 设置毛玻璃虚化效果 */
+  -webkit-backdrop-filter: saturate(50%) blur(4px);
 }
