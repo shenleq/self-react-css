@@ -27,6 +27,7 @@ import useUrlState from "@ahooksjs/use-url-state";
 import Mock from "mockjs";
 import { VirtualKeyboard } from '../../pageUtils/VK/index'
 import KioskBoard from 'kioskboard';
+import config  from '../../config/charter.config.js'
 import "./index.css";
 
 const location = useLocation;
@@ -401,45 +402,9 @@ const AHooks = () => {
    * @description 虚拟键盘配置(init)以及应用(run)
    */
   //键盘3排对应的键值
-  const keysObj = [
-    {
-       "0": "Q",
-       "1": "W",
-       "2": "E",
-       "3": "R",
-       "4": "T",
-       "5": "Y",
-       "6": "U",
-       "7": "I",
-       "8": "O",
-       "9": "P"
-    },
-    {
-       "0": "A",
-       "1": "S",
-       "2": "D",
-       "3": "F",
-       "4": "G",
-       "5": "H",
-       "6": "J",
-       "7": "K",
-       "8": "L"
-    },
-    {
-       "0": "Z",
-       "1": "X",
-       "2": "C",
-       "3": "V",
-       "4": "B",
-       "5": "N",
-       "6": "M",
-       "7": ",",
-       "8": ".",
-       "9": "/"
-    }
- ]
+
   KioskBoard.init({
-    keysArrayOfObjects: keysObj,  //键盘键值对设置
+    keysArrayOfObjects: config.keysObj,  //键盘键值对设置
     keysJsonUrl: null,  //网络位置键盘键值对设置
     keysSpecialCharsArrayOfStrings: null,  
     keysNumpadArrayOfNumbers: null,
@@ -464,11 +429,21 @@ const AHooks = () => {
   })
   KioskBoard.run('.js-kioskboard-input');
 
+  const feibo = (n) => {
+    if(n == 1 | n == 2){
+      return 1
+    }else{
+      return feibo(n - 1) + feibo(n - 2)
+    }
+  }
+
   useEffect(() => {
     console.log(location);
     setUrlState({ acount: 3 }); //添加query => http://localhost:3000/AHooks?count=3
     setLocalMessage("巴拉巴拉");
     setSessionMessage("哔哩哔哩");
+
+    console.log(feibo(20))
   }, []);
 
   return (
@@ -512,6 +487,43 @@ const AHooks = () => {
               : withLoadingDelayAction.data}
           </div>
         </div>
+        <pre>
+          <code>
+            {`
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                  <meta charset="UTF-8">
+                  <title>第十节课</title>
+                <meta name="viewport" content="width=device-width, intial-scale=1.0">
+                <meta name="keywords" content="小甲鱼,Web开发,HTML5,CSS3,Web编程教学">
+                <meta name="description" content="《零基础入门学习Web开发》案例演示">
+                <meta name="author" content="小甲鱼">
+                <style>
+                  span {color: red}
+                </style>
+              </head>
+              <body>
+                <pre>
+                  &#60;!DOCTYPE html&#62;
+                  &#60;html lang=&#34;en&#34;&#62;
+                  &#60;head&#62;
+                    &#60;meta charset=&#34;UTF-8&#34;&#62;
+                    &#60;title&#62;第十节课&#60;/title&#62;
+                    &#60;meta name=&#34;viewport&#34; content=&#34;width=device-width, intial-scale=1.0&#34;&#62;
+                    &#60;meta name=&#34;keywords&#34; content=&#34;小甲鱼,Web开发,HTML5,CSS3,Web编程教学&#34;&#62;
+                    &#60;meta name=&#34;description&#34; content=&#34;《零基础入门学习Web开发》案例演示&#34;&#62;
+                    &#60;meta name=&#34;author&#34; content=&#34;小甲鱼&#34;&#62;
+                    &#60;style&#62;
+                    span {color: red}
+                    &#60;/style&#62;
+                  &#60;/body&#62;
+                  &#60;/html&#62;
+                </pre>
+              </body>
+              </html>`}
+          </code>
+        </pre>
       </div>
       {/* 从part2开始 */}
       <div className="name-div-item">
@@ -590,6 +602,9 @@ const AHooks = () => {
           </div>
           {/* <div><Input onClick={() => VirtualKeyboard.showKeyboardSetState(V, AHooks)} value={V.value} /></div> */}
           <input class="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
+          <div>
+            <img src="" alt="" />
+          </div>
         </div>
       </div>
       {/*从part3*/}
