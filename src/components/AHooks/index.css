@@ -35,3 +35,15 @@
   /* 设置毛玻璃虚化效果 */
   -webkit-backdrop-filter: saturate(50%) blur(4px);
 }
+.roteImg{
+  position: relative;
+  height: 300px;
+  width: 100%;
+  border: 1px solid red;
+}
+.roteImg img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: linear 600ms;
+}

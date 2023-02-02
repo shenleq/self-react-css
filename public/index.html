@@ -361,6 +361,23 @@
     });
 
   </script>
+  <script>
+    // 两数组中位数
+    var zwsh = (nums1, nums2) => {
+      let i = 0, j = 0, k = 0, m1 = 0, m2 = 0;
+		  let mid = Math.floor((nums1.length + nums2.length) / 2);
+		  while (k <= mid && (i < nums1.length || j < nums2.length)) {
+		  	m1 = m2;
+		  	if (i == nums1.length || (i != nums1.length && j != nums2.length && nums2[j] < nums1[i]))
+		  		m2 = nums2[j++];
+		  	else
+		  		m2 = nums1[i++];
+		  	k++;
+		  }
+		  return (nums1.length + nums2.length) % 2 == 1 ? m2 : ((m1 + m2) / 2);
+    }
+    
+  </script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Button, Input, message } from "antd";
+import { Button, Input, message, Icon } from "antd";
 import {
   useRequest,
   useToggle,
@@ -28,6 +28,7 @@ import Mock from "mockjs";
 import { VirtualKeyboard } from '../../pageUtils/VK/index'
 import KioskBoard from 'kioskboard';
 import config  from '../../config/charter.config.js'
+import Img1 from '../../assets/picture/1.png'
 import "./index.css";
 
 const location = useLocation;
@@ -66,6 +67,7 @@ const location = useLocation;
 const reg = /^[0-9]*$/;
 
 const AHooks = () => {
+  const [tog, setTog] = useState(0)
   const [name, setName] = useState();
   const [mutateName, setMutateName] = useState();
   //触发函数，一般写网络请求，这里用定时器模拟
@@ -436,14 +438,35 @@ const AHooks = () => {
       return feibo(n - 1) + feibo(n - 2)
     }
   }
+  //字符串最长不重复字符串长度
+  const [strll, setStrll] = useState('')
+  const [l, setL] = useState(1)
+  let arr = []
+  const str2 = (i,e) =>  {
+      for(let j = i + 1; j < e.length; j++){
+        if(e[i] !== e[j]){
+          setL(l + 1)
+        }else if(e[i] === e[j] || j == e.length - 1){
+          arr[i] = l
+          setL(1)
+          return 
+        }
+      }
+      }
+  const strLongest = (e) => {
+    for(let i = 0; i < e.length - 1; i++){
+      str2(i, e)
+    }
+    return JSON.stringify(arr)
+  }
 
   useEffect(() => {
     console.log(location);
     setUrlState({ acount: 3 }); //添加query => http://localhost:3000/AHooks?count=3
     setLocalMessage("巴拉巴拉");
     setSessionMessage("哔哩哔哩");
-
-    console.log(feibo(20))
+    window.SharedWorker
+    // console.log(feibo(20))
   }, []);
 
   return (
@@ -455,7 +478,7 @@ const AHooks = () => {
             onChange={(e) => setName(e.target.value)}
             value={name}
             placeholder="输入姓名"
-            style={{ width: 240, marginRight: 16 }}
+            style={{ width: 240, marginRight: 16 }}  
           />
           {/* <Button disabled={loading} onClick={run(name)}>{loading ? "loading" : "更改名字"}</Button></div> */}
           <Button disabled={loading} onClick={onClick}>
@@ -602,13 +625,18 @@ const AHooks = () => {
           </div>
           {/* <div><Input onClick={() => VirtualKeyboard.showKeyboardSetState(V, AHooks)} value={V.value} /></div> */}
           <input class="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
-          <div>
-            <img src="" alt="" />
+          <div className="roteImg">
+            <Button onClick={() => {setTog(tog - 90)}} >{"<-"}</Button><Button onClick={() => {setTog(tog + 90)}}>{"->"}</Button>
+            <img src={Img1}  alt="" style={{transform:  `translate(-50%, -50%) rotate(${tog < 0 ? ("-" + Math.abs(tog) + "deg") : (tog + "deg")}`}} />
           </div>
         </div>
       </div>
       {/*从part3*/}
-      <div className="name-div-item"></div>
+      
+      <div className="name-div-item">
+        <Input value={strll} onChange={(e) => setStrll(e.target.value)}></Input>
+        <div>{strLongest(strll)}</div>
+      </div>
     </div>
   );
 };
