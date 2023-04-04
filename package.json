@@ -39,6 +39,7 @@
     "kioskboard": "^2.3.0",
     "leaflet": "^1.8.0",
     "less-loader": "^11.0.0",
+    "live2d-widget": "^3.1.4",
     "mini-css-extract-plugin": "^2.4.5",
     "mockjs": "^1.1.0",
     "nanoid": "^3.1.18",

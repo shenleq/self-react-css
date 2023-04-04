@@ -26,7 +26,7 @@
 // 		</div>
 // 	)
 // }
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header'
 import ContainerL from './components/ContainerL'
 import AntTable from './components/AntTable'
@@ -45,13 +45,16 @@ export default function ReactStudy() {
     {id:'006',path:'Self'},
     {id:'007',path:'Video'},
     {id:'008',path:'AHooks'},
+    {id:'009',path:'TicTokStudy'},
   ]
   const element = useRoutes(useMap)
+	const [mapState, setMapState] = useState(1) //控制地图模块显示
   return (
     <>
       	<div className='R-Echars'>
 				<Header 
 				  path={path}
+					setMapState={setMapState}
 				/>
 				{/* <Routes>
 					  	<Route path='/Bar' element={<Bar/>} />
@@ -62,12 +65,18 @@ export default function ReactStudy() {
 							<Route path='/' element={<Navigate to="/Bar"/>} />
 					  </Routes> */}
 				{element}
-				<div className='L-C'>
-					<ContainerL/>
-					{/* <ControlDiv setp={setp}/> */}
-				</div>
-				<AntTable />
-				<Canvas />
+				{
+					mapState ? (
+						<>
+						  <div className='L-C'>
+						    <ContainerL/>
+						  {/* <ControlDiv setp={setp}/> */}
+					    </div>
+							<AntTable />
+				      <Canvas />
+						</>
+					) : ''
+				}
 			</div>
     </>
 		// <div><StudyCss></StudyCss></div>

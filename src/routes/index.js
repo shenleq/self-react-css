@@ -7,6 +7,7 @@ import Pie from '../components/Echarts/Pie'
 import Self from '../components/Echarts/Slfe'
 import Video from '../components/Video'
 import AHooks from '../components/AHooks'
+import TicTokStudy from "../components/TictokStudy"
 // import ReactStudy from '../pages/ReactStudy'
 // import StudyCss from '../pages/studyCss'
 
@@ -45,6 +46,10 @@ export default [
       {
         path:'/AHooks',
         element:<AHooks key="AHooks"/>
+      },
+      {
+        path:'/TicTokStudy',
+        element:<TicTokStudy key="TicTokStudy"/>
       },
       {
         path:'/',

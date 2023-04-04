@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import processor from '../../config/processor';
 import { Button } from 'antd';
 
+import './index.css'
 import 'antd/dist/antd.min.css'
 
 
@@ -41,6 +42,7 @@ export default function Video() {
           
         >录制</Button>
       </div>
+      <img src={imgUrl} alt="截图" className='img-catch' />
       {/* <img src={imgUrl} alt="" /> */}
     </div>
   )

@@ -453,11 +453,16 @@ const AHooks = () => {
         }
       }
       }
+
   const strLongest = (e) => {
     for(let i = 0; i < e.length - 1; i++){
       str2(i, e)
     }
     return JSON.stringify(arr)
+  } 
+
+  async function myadd () {
+    
   }
 
   useEffect(() => {
@@ -516,33 +521,17 @@ const AHooks = () => {
               <!DOCTYPE html>
               <html lang="en">
               <head>
-                  <meta charset="UTF-8">
-                  <title>第十节课</title>
-                <meta name="viewport" content="width=device-width, intial-scale=1.0">
-                <meta name="keywords" content="小甲鱼,Web开发,HTML5,CSS3,Web编程教学">
-                <meta name="description" content="《零基础入门学习Web开发》案例演示">
-                <meta name="author" content="小甲鱼">
                 <style>
-                  span {color: red}
+                  .mydiv{
+                    color: blue,
+                    font-size: 24px
+                  }
                 </style>
               </head>
               <body>
-                <pre>
-                  &#60;!DOCTYPE html&#62;
-                  &#60;html lang=&#34;en&#34;&#62;
-                  &#60;head&#62;
-                    &#60;meta charset=&#34;UTF-8&#34;&#62;
-                    &#60;title&#62;第十节课&#60;/title&#62;
-                    &#60;meta name=&#34;viewport&#34; content=&#34;width=device-width, intial-scale=1.0&#34;&#62;
-                    &#60;meta name=&#34;keywords&#34; content=&#34;小甲鱼,Web开发,HTML5,CSS3,Web编程教学&#34;&#62;
-                    &#60;meta name=&#34;description&#34; content=&#34;《零基础入门学习Web开发》案例演示&#34;&#62;
-                    &#60;meta name=&#34;author&#34; content=&#34;小甲鱼&#34;&#62;
-                    &#60;style&#62;
-                    span {color: red}
-                    &#60;/style&#62;
-                  &#60;/body&#62;
-                  &#60;/html&#62;
-                </pre>
+                <div class="mydiv">123123</div>
+                <input type="text" />
+                <span style="color: red">123123</span>
               </body>
               </html>`}
           </code>
@@ -624,7 +613,7 @@ const AHooks = () => {
             </div>
           </div>
           {/* <div><Input onClick={() => VirtualKeyboard.showKeyboardSetState(V, AHooks)} value={V.value} /></div> */}
-          <input class="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
+          <input className="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
           <div className="roteImg">
             <Button onClick={() => {setTog(tog - 90)}} >{"<-"}</Button><Button onClick={() => {setTog(tog + 90)}}>{"->"}</Button>
             <img src={Img1}  alt="" style={{transform:  `translate(-50%, -50%) rotate(${tog < 0 ? ("-" + Math.abs(tog) + "deg") : (tog + "deg")}`}} />
@@ -634,8 +623,11 @@ const AHooks = () => {
       {/*从part3*/}
       
       <div className="name-div-item">
-        <Input value={strll} onChange={(e) => setStrll(e.target.value)}></Input>
-        <div>{strLongest(strll)}</div>
+        <Input value={strll} onChange={(e) => {
+          console.log(e.target.value)
+          setStrll(e.target.value)}
+          } maxLength={6}></Input>
+        {/* <div>{strLongest(strll)}</div> */}
       </div>
     </div>
   );

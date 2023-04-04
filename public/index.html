@@ -119,6 +119,7 @@
     /* .c-c .ant-radio-button-wrapper{
 
       } */
+    #live2dcanvas {border: 0 !important;}
   </style>
 </head>
 
@@ -127,6 +128,7 @@
   <div id="root"></div>
   <!-- <div id="lizi"></div>
   <div id="lizi2"></div> -->
+  <div id="live2d-widget"><canvas id="live2dcanvas" width="100" height="200" style="position: fixed;width:100px;height:200;opacity: 0.5;right: 0px;bottom: -20px;z-index: 99999;pointer-events: none;border:0;"></canvas></div>
   <script src="https://zhichaosong.github.io/particles-js/particles.min.js"></script>
   <script>
     particlesJS('lizi',
@@ -377,6 +379,34 @@
 		  return (nums1.length + nums2.length) % 2 == 1 ? m2 : ((m1 + m2) / 2);
     }
     
+  </script>
+  <script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.4/lib/L2Dwidget.0.min.js"></script>
+  <script type="text/javascript"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.4/lib/L2Dwidget.min.js?_=1557308476616"></script>
+  <script type="text/javascript">
+    // L2Dwidget.init();
+    L2Dwidget.init({
+      "display": {
+        "superSample": 2,
+        "width": 100,
+        "height": 200,
+        "position": "left",
+        "hOffset": 0,
+        "vOffset": 0
+      },
+      "dialog": {
+        "enable": true,
+        "script": {
+            //每20s，显示一言（调用一言Api返回的句子）
+            'every idle 20s': '$hitokoto$',
+            //触摸到class='star'对象
+            'hover .star': '星星在天上而你在我心里 (*/ω＼*)',
+            //触摸到身体
+            'tap body': '害羞?(? ???ω??? ?)?',
+            //触摸到头部
+            'tap face': '~~'
+      }
+    }
+  });
   </script>
 </body>
 
