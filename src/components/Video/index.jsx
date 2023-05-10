@@ -31,16 +31,16 @@ export default function Video() {
             width: 400,
             height: 240
           }}></canvas>
-        <Button id='cut' onClick={() => {
+          <div>
+          <Button id='cut' onClick={() => {
           setImgUrl(processor.cut())
-          console.log(imgUrl)
+          // console.log(imgUrl)
           // if(typeof imgUrl !== undefined){
           //   dataURIToFile(imgUrl, 'D:\self-Study\study\self_react_s\react-Router-Echarts-Leaflet\public\saveimg')
           // }
         }} >截图</Button>
-        <Button
-          
-        >录制</Button>
+        <Button>录制</Button>
+          </div>
       </div>
       <img src={imgUrl} alt="截图" className='img-catch' />
       {/* <img src={imgUrl} alt="" /> */}

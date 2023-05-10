@@ -465,8 +465,31 @@ const AHooks = () => {
     
   }
 
+  
+ //数据大屏自适应函数
+ const handleScreenAuto = () => {
+  const designDraftWidth = 1920;//设计稿的宽度
+  const designDraftHeight = 960;//设计稿的高度
+  //根据屏幕的变化适配的比例
+  const scale = document.documentElement.clientWidth / document.documentElement.clientHeight < designDraftWidth / designDraftHeight ?
+      (document.documentElement.clientWidth / designDraftWidth) :
+      (document.documentElement.clientHeight / designDraftHeight);
+  //缩放比例
+  (document.querySelector('#screen')).style.transform = `scale(${scale}) translate(-50%)`;
+  }
+
+  //React的生命周期 如果你是vue可以放到mountd或created中
   useEffect(() => {
-    console.log(location);
+      //初始化自适应  ----在刚显示的时候就开始适配一次
+      handleScreenAuto();
+      //绑定自适应函数   ---防止浏览器栏变化后不再适配
+      window.onresize = () => handleScreenAuto();
+      //退出大屏后自适应消失   ---这是react的组件销毁生命周期，如果你是vue则写在deleted中。最好在退出大屏的时候接触自适应
+      return () => window.onresize = null;
+  }, [])
+
+  useEffect(() => {
+    // console.log(location);
     setUrlState({ acount: 3 }); //添加query => http://localhost:3000/AHooks?count=3
     setLocalMessage("巴拉巴拉");
     setSessionMessage("哔哩哔哩");
@@ -475,7 +498,9 @@ const AHooks = () => {
   }, []);
 
   return (
-    <div className="name-div">
+    <div className="screen-wrapper">
+      <div className="screen" id="screen">
+      <div className="name-div">
       <div className="name-div-item">
         <div>
           <Input
@@ -529,7 +554,7 @@ const AHooks = () => {
                 </style>
               </head>
               <body>
-                <div class="mydiv">123123</div>
+                <div class="mydiv">123123有没有垃圾能捡？这就是你练的攀登？</div>
                 <input type="text" />
                 <span style="color: red">123123</span>
               </body>
@@ -628,6 +653,8 @@ const AHooks = () => {
           setStrll(e.target.value)}
           } maxLength={6}></Input>
         {/* <div>{strLongest(strll)}</div> */}
+      </div>
+    </div>
       </div>
     </div>
   );

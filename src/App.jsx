@@ -48,7 +48,7 @@ export default function ReactStudy() {
     {id:'009',path:'TicTokStudy'},
   ]
   const element = useRoutes(useMap)
-	const [mapState, setMapState] = useState(1) //控制地图模块显示
+	const [mapState, setMapState] = useState(0) //控制地图模块显示
   return (
     <>
       	<div className='R-Echars'>

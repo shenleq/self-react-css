@@ -21,7 +21,7 @@ export default function Header(props) {
         {/* 编程路由跳转 */}
             return (
             <button key={p.id} onClick={() => {
-              if(p.id==='008'||p.id==='009'){
+              if(p.id == "007" || p.id==='008'||p.id==='009'){
                 setMapState(0)
               }else{
                 setMapState(1)

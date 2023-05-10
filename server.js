@@ -2,6 +2,7 @@ const express = require('express')
 var app = express()
 //以下是进行视频文件传输的代码！！
 const video = './BBB.mp4'
+const ocean = './ocean.mp4'
 const fs = require('fs')
 const {stat} = require('fs').promises
 app.use('*', (req, res, next) => {
@@ -36,6 +37,27 @@ app.get('/video', async (req, res) => {
     fs.createReadStream(video).pipe(res)
   }
 })
+app.get('/ocean', async (req, res) => {
+    let range = req.headers['range']
+    if (range) {
+      let stats = await stat(ocean)
+      let r = range.match(/=(\d+)-(\d+)?/)
+      console.log(range)
+      let start = parseInt(r[1], 10)
+      let end = r[2] ? parseInt(r[2], 10) : start + 1024 * 1024
+      if(end > stats.size -1) end = stats.size - 1
+      let header = {
+        'Content-Type': 'video/mp4',
+        'Content-Range': `bytes ${start} - ${end} / ${stats.size}`,
+        'Content-Length': end - start + 1,
+        'Accept-Ranges': 'bytes'
+      }
+      res.writeHead(206,header)
+      fs.createReadStream(ocean,{start:start,end:end}).pipe(res)
+    } else {
+      fs.createReadStream(ocean).pipe(res)
+    }
+  })
 app.get('/source', (rep, res) => {
   res.send(
     [
