@@ -1,11 +1,15 @@
 import { React, useState, useEffect, useRef } from "react";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import "./index.scss";
 
 import IMG1 from "../../assets/picture/1.png"
 import IMG3 from "../../assets/picture/3.png"
 import QiQiu from "../../assets/picture/qiqiu.png"
-import { transform } from "typescript";
+
+import initShader from "../../config/webgl.config"
+import initmap from "../../config/map-echaerts"
+import config from "../../config/charter.config";
+
 
 const TicTokStudy = ()=> {
 
@@ -13,6 +17,8 @@ const TicTokStudy = ()=> {
   const [textUp, setTextUp] = useState(false)
   const [textUp2, setTextUp2] = useState("sword art online")
   const [textNum, setTextNum] = useState(0)
+  //整数转罗马数字的整数
+  const [romaNum, setRomaNum] = useState('')
   //计数
   const tetxCo = [
     "you have changed!",
@@ -218,12 +224,93 @@ const TicTokStudy = ()=> {
     })
   }
 
+  //webgl init 
+  const gl1 = () => {
+    const ctx = document.getElementById('canvas')
+    const gl = ctx.getContext('webgl')
+  
+    //着色器： 通过程序用固定的渲染管线，来处理图像的渲染，着色器分为两种,顶点着色器：顶点理解为坐标，片元着色器：像素
+  
+    //顶点着色器源码
+    const VERTEX_SHADER_SOURCE = `
+      void main() {
+        gl_Position = vec4(1.0, 2.0, 0.0, 2.0);
+        gl_PointSize = 100.0;
+      }  
+    `
+    //片元着色器源码
+    const FRAGMENT_SHADER_SOURCE = `
+      void main() {
+        gl_FragColor = vec4(2.0, 0.0, 0.0, 2.0);
+      }   
+    `
+    //创建着色器
+    const program = initShader(gl, VERTEX_SHADER_SOURCE, FRAGMENT_SHADER_SOURCE)
+  
+    //执行绘制
+    gl.drawArrays(gl.POINTS, 0, 1)
+    // gl.drawArrays(gl.LINES, 0, 1)
+    // gl.drawArrays(gl.TRIANGLES, 0, 1)
+  }
+
+  //3D-echarts地图
+  const map = () => {
+    return initmap(document.getElementById("e-map"))
+  }
+
+  //cookies SameSite属性，默认值（Lax）， 用于限制跨站请求 None： 不做任何跨请求限制 Lax: 阻止发送cookie，但不限制超链接 Strict：阻止所有跨站
+  //a.do.com/cn b.do.com/cn --- 同站   a.fo.com/cn a.do.com/cn --- 不同站  例外： a.do.io b.do.io ---  不同站
+
+  //从一个文字转语音体现的知识   
+  const yuyin = {
+    1: "根据文字获取语音--使用过自己的或者其他公司的语音合成服务--web页面发送文本到自己的服务器， 服务器处理文返回base64数据（为了统一格式使用base64）",
+    2: "优化： 断句-- 某些标点进行切割以及（）”“ 中间的文字 ， 可以使用栈(键值对的形式)来记录断句结果",
+    3: "传输： 一个接一个发送或者并发请求()",
+  }
+  //
+  const textChose  = () => {
+    const container = document.getElementsByClassName("body")
+    const selection = window.getSelection()
+    const range = selection.getRangeAt(0)
+    const parentRect = container.getBoundingClientRect()
+    const clientRects = range.getClientRects()
+    
+    for (let i = 0; i < clientRects.length; i++) {
+      const rect = clientRects[i]
+      const x = rect.left - parentRect.left
+      const y = rect.top - parentRect.top
+      const width = rect.right - rect.left
+      const height = rect.bottom - rect.top
+    
+      // canvas 绘制
+      ctx.fillRect(x, y, width, height)
+    }    
+  }
+
+
+/** .child {
+  overscroll-behavior-y: contain;
+  overflow-y: auto;
+}
+overscroll-behavior 属性有 3 个值：
+
+auto - 默认。元素的滚动会传播给祖先元素。
+
+contain - 阻止滚动链接。滚动不会传播给祖先，但会显示元素内的原生效果。例如，Android 上的炫光效果或 iOS 上的回弹效果，当用户触摸滚动边界时会通知用户。注意：overscroll-behavior: contain 在 html 元素上使用可防止滚动导航操作。
+
+none - 和 contain 一样，但它也可以防止节点本身的滚动效果（例如 Android 炫光或 iOS 回弹）。
+*/
+
+  //整数转罗马数字
+  const roma = (val) => config.roma(val)
   //初始化
   useEffect(() => {
     textC()
     menuAnd()
     textSplit()
     beatry()
+    gl1()
+    map()
   }, [])
 
     return (
@@ -385,7 +472,7 @@ const TicTokStudy = ()=> {
               海洋
             </div>
             <div className="right">
-              <video className="video-ocean" src="http://thenewcode.com/assets/videos/ocean-small.mp4"  autoPlay muted loop preload={true} poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/oceanshot.jpg">
+              <video className="video-ocean" src="http://localhost:8000/ocean"  autoPlay muted loop preload={true} poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/oceanshot.jpg">
               </video>
               <h1 className="h1-ocean">ocean</h1>
             </div>
@@ -610,47 +697,80 @@ const TicTokStudy = ()=> {
             </div>
           </div>
           <div className="home-item">
-          <div className="left">
+            <div className="left">
+              WebGl-1
             </div>
             <div className="right">
+              <canvas id="canvas" width="100%" height="100%">
+                不支持canvas
+              </canvas>
             </div>
           </div>
         </div>
         <div className="home-div">
           <div className="home-item">
-          <div className="left">
+            <div className="left">
+              echarts3D地图
             </div>
             <div className="right">
+              <div id="e-map"></div>
             </div>
           </div>
           <div className="home-item">
-          <div className="left">
+            <div className="left">
+              整数转罗马数字
             </div>
             <div className="right">
+              <Input 
+                placeholder="请输入整数"
+                onChange={(e) => {setRomaNum(roma(e.target.value))}}
+              ></Input>   
+              <div>
+                <span>罗马数字：</span><span>{romaNum}</span>
+              </div> 
             </div>
           </div>
           <div className="home-item">
-          <div className="left">
+            <div className="left">
+              网格布局
             </div>
             <div className="right">
+              <div className="div-grid">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+              </div>
             </div>
           </div>
         </div>
         <div className="home-div">
           <div className="home-item">
-          <div className="left">
+            <div className="left">
+              文字标注拼音
+            </div>
+            <div className="right">
+              <ruby>一<rt>yi</rt></ruby>
+              <ruby>虎<rt>hu</rt></ruby>
+              <ruby>杀<rt>sha</rt></ruby>
+              <ruby>两<rt>liang</rt></ruby>
+              <ruby>羊<rt>yang</rt></ruby>
+            </div>
+          </div>
+          <div className="home-item">
+            <div className="left">
+              
             </div>
             <div className="right">
             </div>
           </div>
           <div className="home-item">
-          <div className="left">
-            </div>
-            <div className="right">
-            </div>
-          </div>
-          <div className="home-item">
-          <div className="left">
+            <div className="left">
             </div>
             <div className="right">
             </div>

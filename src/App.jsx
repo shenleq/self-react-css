@@ -26,7 +26,7 @@
 // 		</div>
 // 	)
 // }
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
 import ContainerL from './components/ContainerL'
 import AntTable from './components/AntTable'
@@ -34,6 +34,7 @@ import StudyCss from './pages/studyCss'
 import Canvas from './components/Canvas'
 import {Route, Routes, Navigate, BrowserRouter, useRoutes, NavLink} from 'react-router-dom'
 import useMap from "./routes"
+import mockjs from 'mockjs'
 
 export default function ReactStudy() {
 	const path = [
@@ -49,6 +50,9 @@ export default function ReactStudy() {
   ]
   const element = useRoutes(useMap)
 	const [mapState, setMapState] = useState(0) //控制地图模块显示
+	useEffect(() => {
+		window.__proto__.myMock = mockjs
+	},[])
   return (
     <>
       	<div className='R-Echars'>

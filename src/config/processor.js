@@ -14,8 +14,7 @@ processor.doLoad = function doLoad() {
       let h = video.videoHeight / 2.3;
       console.log(w, h)
       this.timerCallback(w, h);
-    }, 20);
-
+  }, 20);
 };
 processor.timerCallback = function timerCallback(w, h) {
   if (this.video.paused || this.video.ended) {

@@ -39,8 +39,8 @@ export default function Video() {
           //   dataURIToFile(imgUrl, 'D:\self-Study\study\self_react_s\react-Router-Echarts-Leaflet\public\saveimg')
           // }
         }} >截图</Button>
-        <Button>录制</Button>
-          </div>
+        <Button  >录制</Button>
+      </div>
       </div>
       <img src={imgUrl} alt="截图" className='img-catch' />
       {/* <img src={imgUrl} alt="" /> */}
