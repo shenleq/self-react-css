@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {Button} from 'antd';
-import 'antd/dist/antd.min.css'
 
 export default function LeafletTest(props) {
   let {setCm,setP} = props

@@ -27,6 +27,7 @@
 // 	)
 // }
 import React, { useEffect, useState } from 'react'
+import { Watermark, FloatButton, message } from 'antd'
 import Header from './components/Header'
 import ContainerL from './components/ContainerL'
 import AntTable from './components/AntTable'
@@ -54,7 +55,8 @@ export default function ReactStudy() {
 		window.__proto__.myMock = mockjs
 	},[])
   return (
-    <>
+		<Watermark content="Wang QiPeng">
+		<>
       	<div className='R-Echars'>
 				<Header 
 				  path={path}
@@ -83,6 +85,8 @@ export default function ReactStudy() {
 				}
 			</div>
     </>
+		<FloatButton onClick={() => message.info("我去你的！")} />
+    </Watermark>
 		// <div><StudyCss></StudyCss></div>
   )
 }

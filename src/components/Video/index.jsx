@@ -3,7 +3,6 @@ import processor from '../../config/processor';
 import { Button } from 'antd';
 
 import './index.css'
-import 'antd/dist/antd.min.css'
 
 
 export default function Video() {
