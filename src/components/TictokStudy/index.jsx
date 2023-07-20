@@ -97,7 +97,7 @@ const TicTokStudy = () => {
   //右键菜单
 
   //文字特效
-  const textC = () => {
+  const textC = () => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     let duration = 0.8;
     let delay = 0.3;
     let revealText = document.querySelector(".reveal");
@@ -180,7 +180,6 @@ const TicTokStudy = () => {
 
       //poster transform
       $menu[0].style.transfrom = transformPoster;
-
       for (let i = 0; i < 3; i++) {
         let offsetLayer = $item[i].style.offset || 0;
         let transformLayer =
@@ -897,8 +896,14 @@ none - 和 contain 一样，但它也可以防止节点本身的滚动效果（�
             </div>
           </div>
           <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
+            <div className="left">
+              clip-path动画
+            </div>
+            <div className="right">
+              <div class="container-u">
+                <div class="letter u-u"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="home-div">
