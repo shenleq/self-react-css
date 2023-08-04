@@ -8,6 +8,7 @@ import Self from '../components/Echarts/Slfe'
 import Video from '../components/Video'
 import AHooks from '../components/AHooks'
 import TicTokStudy from "../components/TictokStudy"
+import JueJinStudy from "../components/JueJinStudy"
 // import ReactStudy from '../pages/ReactStudy'
 // import StudyCss from '../pages/studyCss'
 
@@ -50,6 +51,10 @@ export default [
       {
         path:'/TicTokStudy',
         element:<TicTokStudy key="TicTokStudy"/>
+      },
+      {
+        path:'/JueJinStudy',
+        element:<JueJinStudy key="JunJinStudy"/>
       },
       {
         path:'/',

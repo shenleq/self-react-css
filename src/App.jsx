@@ -48,6 +48,7 @@ export default function ReactStudy() {
     {id:'007',path:'Video'},
     {id:'008',path:'AHooks'},
     {id:'009',path:'TicTokStudy'},
+    {id:'010',path:'JueJinStudy'},
   ]
   const element = useRoutes(useMap)
 	const [mapState, setMapState] = useState(0) //控制地图模块显示

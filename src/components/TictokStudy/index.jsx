@@ -906,48 +906,6 @@ none - 和 contain 一样，但它也可以防止节点本身的滚动效果（�
             </div>
           </div>
         </div>
-        <div className="home-div">
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-        </div>
-        <div className="home-div">
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-        </div>
-        <div className="home-div">
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-          <div className="home-item">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
-        </div>
       </div>
     </>
   );
