@@ -1,11 +1,18 @@
 import { React, useState, useEffect, useRef } from "react";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import "./index.scss";
 
 import jietu1 from "../../assets/picture/jietu1.png";
 import jietu2 from "../../assets/picture/jietu2.png";
 
 const JueJinStudy = (props) =>  {
+  //图片清洗
+  const ImgDelete = (e) => {
+    fs.unlink(e, (err) => {
+      if(err) throw err;
+      console.log("file deleted!")
+    })
+  }
 
   useEffect(() => {
     const buttonpop = document.getElementById("button")
@@ -15,6 +22,9 @@ const JueJinStudy = (props) =>  {
     })
     buttonpop.addEventListener('mouseleave', () => {
       pop.hidePopover()
+    })
+    document.querySelector('#file').addEventListener('change', (fileInfo) => {
+      console.log('fileInfo', fileInfo.target.files)    
     })
   },[])
 
@@ -121,8 +131,10 @@ const JueJinStudy = (props) =>  {
           </div>
           <div className="home-item">
             <div className="left">
+              清洗文件夹图片
             </div>
             <div className="right">
+              <input type="file" id="file" webkitdirectory />
             </div>
           </div>
           <div className="home-item">
